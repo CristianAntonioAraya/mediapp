@@ -20,8 +20,10 @@ const boomErrorHandler = (
     if (err.isBoom) {
         const { output } = err;
         res.status(output.statusCode).json({
-            msg: 'error de boom',
-            payload: output.payload,
+            ok: false,
+            error: output.payload.error,
+            msg: output.payload.message,
+            statusCode: output.payload.statusCode,
         });
     } else {
         next(err);
@@ -36,7 +38,7 @@ const handleError = (
 ): void => {
     res.status(500).json({
         ok: false,
-        message: err.message,
+        msg: err.message,
         stack: err.stack,
     });
 };

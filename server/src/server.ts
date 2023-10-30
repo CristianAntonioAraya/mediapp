@@ -1,5 +1,7 @@
 import express, { Application } from 'express';
 import DatabaseInitializer from './db';
+import cors from 'cors';
+
 import appRoutes from './router/AppRoutes';
 import bodyParser from 'body-parser';
 import {
@@ -20,6 +22,8 @@ class Server {
         this.routes();
     }
     middleware() {
+        this.app.use(cors());
+        this.app.options('*', cors());
         this.app.use(bodyParser.json());
     }
     routes() {

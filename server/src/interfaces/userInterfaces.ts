@@ -11,9 +11,9 @@ interface IUser {
     createdAt?: string;
     updatedAt?: string;
     phoneNumber?: string;
-    ciudad?: string;
-    genero?: string;
-    fechaNacimiento?: string;
+    city?: string;
+    genre?: string;
+    age?: string;
     professionalId?: number | null;
     professionalName?: string | null;
 }

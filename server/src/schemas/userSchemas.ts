@@ -15,9 +15,9 @@ const signUpSchema = Joi.object({
     email: email.required(),
     role: role.default('patient'),
     phoneNumber: Joi.string().allow(null),
-    ciudad: Joi.string().allow(null),
-    genero: Joi.string().allow(null),
-    fechaNacimiento: Joi.date().allow(null),
+    city: Joi.string().allow(null),
+    genre: Joi.string().allow(null),
+    age: Joi.date().allow(null),
     professionalId: Joi.number().allow(null),
     professionalName: Joi.string().allow(null),
 });
@@ -32,9 +32,9 @@ const updateUserSchema = Joi.object({
     password: password.required(),
     email: email.required(),
     phoneNumber: Joi.string(),
-    ciudad: Joi.string(),
-    genero: Joi.string(),
-    fechaNacimiento: Joi.date(),
+    city: Joi.string(),
+    gente: Joi.string(),
+    age: Joi.string(),
 });
 
 export { getUserSchema, signUpSchema, signInSchema, updateUserSchema };

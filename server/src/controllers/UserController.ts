@@ -53,7 +53,12 @@ export async function signUp(
 
         res.status(201).json({
             ok: true,
-            user: { userName: user.userName, email: user.email, token },
+            user: {
+                userName: user.userName,
+                email: user.email,
+                role: user.role,
+                token,
+            },
         });
     } catch (error) {
         next(error);
@@ -81,6 +86,7 @@ export async function signIn(
             user: {
                 userName: user.userName,
                 email: user.email,
+                role: user.role,
                 token,
             },
         });
@@ -127,14 +133,14 @@ export async function addInfoUser(
 ) {
     try {
         const userId = req.params.id;
-        const { phoneNumber, city, genre, birthday } = req.body;
+        const { phoneNumber, city, genre, age } = req.body;
 
         const updatedUser = await services.addInfo(
             userId,
             phoneNumber,
             city,
             genre,
-            birthday
+            age
         );
         res.status(201).json({ ok: true, updatedUser });
     } catch (error) {

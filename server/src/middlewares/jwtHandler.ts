@@ -29,7 +29,7 @@ const isValidToken = async (
     const token = req.header('x-token');
 
     if (!token) {
-        return res.status(404).json({ ok: false, msg: 'Falta el token' });
+        return res.status(401).json({ ok: false, msg: 'Falta el token' });
     }
     try {
         const verifiedToken = jwt.verify(

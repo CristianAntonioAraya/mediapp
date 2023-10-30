@@ -54,7 +54,7 @@ class User extends Model {
                 genre: {
                     type: DataTypes.STRING,
                 },
-                birthdate: {
+                age: {
                     type: DataTypes.STRING,
                 },
             },
