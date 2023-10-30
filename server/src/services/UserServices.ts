@@ -2,7 +2,6 @@ import bcrypt from 'bcryptjs';
 import boom from '@hapi/boom';
 import { IUser, IUserSignUp } from '../interfaces/userInterfaces';
 import { ProfessionalModel, UserModel } from '../models/index';
-import { string } from 'joi';
 
 class UserServices {
     async getAll() {
@@ -71,30 +70,56 @@ class UserServices {
         return updatedUser;
     }
 
-    async assign(userId: string, professionalId: string) {
+    async assign(userId: string, registerScore: string) {
         const user = await UserModel.findByPk(userId);
-        const professional = await ProfessionalModel.findByPk(professionalId);
 
         if (!user) {
-            throw boom.badRequest('Usuario  no encontrado');
+            throw boom.badRequest('Usuario no encontrado');
         }
-        if (!professional) {
-            throw boom.badRequest('Profesional no encontrado');
+        if (!registerScore) {
+            throw boom.badRequest('Puntaje Inválido');
         }
 
-        user.professionalId = professional.id;
-        user.professionalName = professional.professionalName;
+        const score = parseInt(registerScore, 10);
+
+        let professionalRange: number | null = null;
+        let professionalId: number | null = null;
+
+        if (score >= 5 && score <= 7) {
+            professionalRange = 1;
+        } else if (score >= 8 && score <= 10) {
+            professionalRange = 2;
+        } else if (score >= 11 && score <= 13) {
+            professionalRange = 3;
+        } else if (score >= 14 && score <= 15) {
+            professionalRange = 4;
+        }
+
+        if (professionalRange !== null) {
+            const professionalFind = await ProfessionalModel.findOne({
+                where: { range: professionalRange },
+            });
+
+            if (professionalFind) {
+                professionalId = professionalFind.id;
+                user.professionalName = professionalFind.professionalName;
+            }
+        }
+
+        user.professionalId = professionalId;
+        user.registerScore = score;
 
         await user.save();
 
         return user;
     }
+
     async addInfo(
         userId: string,
         phoneNumber: string,
         city: string,
         genre: string,
-        birthday: string
+        age: string
     ) {
         const user = await UserModel.findByPk(userId);
 
@@ -105,7 +130,7 @@ class UserServices {
         user.phoneNumber = phoneNumber;
         user.city = city;
         user.genre = genre;
-        user.birthdate = birthday;
+        user.age = age;
 
         await user.save();
 

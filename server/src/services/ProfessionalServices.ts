@@ -15,7 +15,17 @@ class ProfessionalServices {
         return pro;
     }
     async create(request: IPro) {
-        const { professionalName, speciality } = request;
+        const { professionalName, speciality, range } = request;
+        const count = await ProfessionalModel.count();
+
+        const maxRecords = 4;
+
+        if (count >= maxRecords) {
+            throw boom.badRequest(
+                'Se alcanzó el máximo de registros de profesionales'
+            );
+        }
+
         const checkPro = await ProfessionalModel.findOne({
             where: { professionalName },
         });
@@ -26,6 +36,7 @@ class ProfessionalServices {
         const newPro = await ProfessionalModel.create({
             professionalName,
             speciality,
+            range,
         });
 
         return newPro;

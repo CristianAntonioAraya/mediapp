@@ -1,4 +1,8 @@
-import type { RouteRecordRaw } from 'vue-router';
+import type {
+    NavigationGuardNext,
+    RouteLocationNormalized,
+    RouteRecordRaw,
+} from 'vue-router';
 import { createRouter, createWebHistory } from 'vue-router';
 // auth
 import SignInView from '../views/auth/SignInView.vue';

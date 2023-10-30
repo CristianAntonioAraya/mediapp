@@ -9,8 +9,9 @@ class User extends Model {
     public phoneNumber!: string;
     public city!: string;
     public genre!: string;
-    public birthdate!: string;
+    public age!: string;
     public professionalId!: number | null;
+    public registerScore!: number | null;
     public professionalName!: string | null;
 
     static initialize(sequelize: Sequelize) {
@@ -38,6 +39,9 @@ class User extends Model {
                     type: DataTypes.ENUM('admin', 'patient'),
                     allowNull: false,
                     defaultValue: 'patient',
+                },
+                registerScore: {
+                    type: DataTypes.INTEGER,
                 },
                 professionalId: {
                     type: DataTypes.INTEGER,

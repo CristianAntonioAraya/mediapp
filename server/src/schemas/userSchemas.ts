@@ -14,6 +14,7 @@ const signUpSchema = Joi.object({
     password: password.required(),
     email: email.required(),
     role: role.default('patient'),
+    registerScore: Joi.number().allow(null),
     phoneNumber: Joi.string().allow(null),
     city: Joi.string().allow(null),
     genre: Joi.string().allow(null),

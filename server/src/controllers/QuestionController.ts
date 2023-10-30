@@ -57,8 +57,8 @@ export async function updateQuestion(
     try {
         const id: string = req.params.id;
         const questionData: IQuestion = req.body;
-        const updatedPro = await services.update(id, questionData);
-        res.status(201).json({ ok: true, updatedPro });
+        const updatedQuestion = await services.update(id, questionData);
+        res.status(201).json({ ok: true, updatedQuestion });
     } catch (error) {
         next(error);
     }

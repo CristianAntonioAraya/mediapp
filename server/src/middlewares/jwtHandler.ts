@@ -77,34 +77,4 @@ const isAdmin = async (
     next();
 };
 
-const isNotAdmin = async (
-    req: IUserRequest,
-    res: Response,
-    next: NextFunction
-) => {
-    const token = req.header('x-token');
-
-    if (!token) {
-        return res.status(404).json({ ok: false, msg: 'Falta el token' });
-    }
-    try {
-        const verifiedToken = jwt.verify(
-            token,
-            process.env.SECRET_JWT!
-        ) as JwtPayload;
-
-        if (verifiedToken.role === 'admin') {
-            return res.status(401).json({
-                ok: false,
-                msg: 'No estas autorizado para realizar esta operación',
-            });
-        }
-    } catch (error) {
-        console.log('Jwt expired or invalid');
-        return res.status(400).json({ ok: false, msg: 'Token Inválido' });
-    }
-
-    next();
-};
-
-export { generateToken, isValidToken, isAdmin, isNotAdmin };
+export { generateToken, isValidToken, isAdmin };

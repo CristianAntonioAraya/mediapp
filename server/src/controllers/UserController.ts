@@ -57,6 +57,7 @@ export async function signUp(
                 userName: user.userName,
                 email: user.email,
                 role: user.role,
+                id: user.id,
                 token,
             },
         });
@@ -87,6 +88,7 @@ export async function signIn(
                 userName: user.userName,
                 email: user.email,
                 role: user.role,
+                id: user.id,
                 token,
             },
         });
@@ -117,9 +119,9 @@ export async function assignProToUser(
 ) {
     try {
         const userId = req.params.id;
-        const { professionalId } = req.body;
+        const { registerScore } = req.body;
 
-        const updatedUser = await services.assign(userId, professionalId);
+        const updatedUser = await services.assign(userId, registerScore);
         res.status(201).json({ ok: true, updatedUser });
     } catch (error) {
         next(error);

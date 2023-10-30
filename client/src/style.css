@@ -1,4 +1,13 @@
+:root {
+    --lightBlue: #d8eefe;
+    --blue: #094067;
+    --red: #ef4565;
+    --white: #fffffe;
+}
 * {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
+        sans-serif;
+    color: var(--blue);
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -8,4 +17,5 @@ body,
 hmtl {
     width: 100vw;
     height: 100vh;
+    overflow-x: hidden;
 }

@@ -46,7 +46,8 @@ class Server {
     }
     init() {
         this.app.listen(this.port, () => {
-            console.log('Server on port ', this.port);
+            const environment = process.env.NODE_ENV;
+            console.log(`Server on port ${this.port} in ${environment} mode`);
         });
     }
 }

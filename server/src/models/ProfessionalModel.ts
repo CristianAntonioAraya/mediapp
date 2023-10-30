@@ -21,6 +21,10 @@ class Professional extends Model {
                     type: DataTypes.STRING,
                     allowNull: false,
                 },
+                range: {
+                    type: DataTypes.INTEGER,
+                    unique: true,
+                },
             },
             {
                 sequelize,

@@ -7,6 +7,7 @@ import {
 } from '../schemas/questionSchemas';
 import {
     createNewQuestion,
+    deleteQuestion,
     getAllQuestions,
     getOneQuestion,
     updateQuestion,
@@ -42,7 +43,7 @@ router.put(
 router.delete(
     '/delete/:id',
     [validateHandler(getQuestionSchema, 'params'), isValidToken, isAdmin],
-    updateQuestion
+    deleteQuestion
 );
 
 export default router;

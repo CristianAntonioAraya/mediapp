@@ -8,6 +8,7 @@ interface IUser {
     email: string;
     password: string;
     role: Role;
+    registerScore: number;
     createdAt?: string;
     updatedAt?: string;
     phoneNumber?: string;

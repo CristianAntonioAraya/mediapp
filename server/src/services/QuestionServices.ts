@@ -25,6 +25,16 @@ class QuestionServices {
             score3,
         } = request;
 
+        const count = await QuestionModel.count();
+
+        const maxRecords = 4;
+
+        if (count >= maxRecords) {
+            throw boom.badRequest(
+                'Se alcanzó el máximo de registros de preguntas'
+            );
+        }
+
         const checkQuestion = await QuestionModel.findOne({
             where: { statement },
         });
