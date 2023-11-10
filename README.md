@@ -1,25 +1,25 @@
 # MediApp
 
-# Descripcion
+# Descripción
 
-El proyecto es un único repositorio que contiene tanto el cliente como el servidor, ambos se deben ejecutar en instancias distintas, a continuacion detallare el funcionamiento.
+Este monorepo, gestionado con Lerna, alberga tanto el cliente como el servidor de la aplicación. La estructura del monorepo permite una gestión eficiente de múltiples paquetes, lo que facilita el desarrollo, la construcción y la implementación de componentes individuales.
 
-# Get Started - Client Side
+## Client Side
 
 El proyecto fue creado con vue, typescript por el tipado y la ayuda a la legibilidad y vite por su rapidez al momento de desarrollar.
 
-## Prerequisitos
+### Prerequisitos
 
 Antes de comenzar, asegurarse de tener estos paquetes instalados
 
 -   [Node.js](https://nodejs.org/) (LTS version recommended)
 -   [npm](https://www.npmjs.com/) (Node Package Manager)
 
-# Get Started: - Server Side
+## Server Side
 
 Este proyecto es un backend desarrollado con Express y PostgreSQL. A continuación, se detallan los pasos para configurar el entorno de desarrollo y comenzar a trabajar en el proyecto.
 
-## Requisitos Previos
+### Prerequisitos
 
 Antes de comenzar, asegúrate de tener las siguientes herramientas instaladas en tu máquina:
 
@@ -28,7 +28,7 @@ Antes de comenzar, asegúrate de tener las siguientes herramientas instaladas en
 -   [TypeScript](https://www.typescriptlang.org/) (Instalado globalmente: `npm install -g typescript`)
 -   [PostgreSQL](https://www.postgresql.org/) (Base de datos relacional)
 
-## Instalacion
+# Instalacion
 
 1. Clona el repositorio desde e
 
@@ -37,24 +37,74 @@ Antes de comenzar, asegúrate de tener las siguientes herramientas instaladas en
     ```
 
 2. Navega al repositorio
+
     ```bash
      cd mediApp
     ```
-3. Ahora encontraras 2 carpetas, client y server, deberas posicionarte sobre ambas carpetas en diferentes consolas de comando
 
-```bash
- cd client o cd server
-```
-
-4. Instala las dependencias del proyecto, este paso se debe hacer en el cliente y en el servidor
+3. Instala las dependencias del proyecto, este paso se debe hacer en el cliente y en el servidor
 
 ```bash
  npm install
 ```
 
+# Scripts Disponibles
+
+1.  Iniciar Todos los Paquetes Concurrentemente
+
+Este script utiliza Lerna para iniciar todos los paquetes de tu monorepo de forma concurrente. Es útil cuando necesitas ejecutar la aplicación en cada paquete simultáneamente.
+
+```bash
+npx lerna run start --parallel
+```
+
+2.  Iniciar Todos los Paquetes Concurrentemente
+
+Este script utiliza Lerna para iniciar el modo de desarrollo en todos los paquetes de forma concurrente. El modo de desarrollo suele implicar recargar automática y otras características que facilitan el desarrollo.
+
+```bash
+npx lerna run dev --parallel
+```
+
+3. Construir un Paquete Específico
+
+Este script utiliza Lerna para construir un paquete específico en tu monorepo. Es útil cuando solo deseas construir y preparar un paquete particular para la implementación.
+
+```bash
+npx lerna run build --scope=server
+```
+
 # Variables de entorno
 
 Antes de levantar el servidor, hace falta crear y rellenar el archivo .env, para ello existe otro fichero con todas las variables necesarias, es **.env.template**
+
+### SERVER_PORT
+
+La variable `SERVER_PORT` especifica el puerto en el que el servidor Express se ejecutará. Asegúrate de que no esté en uso por otros servicios.
+
+### POSTGRES_USERNAME
+
+La variable `POSTGRES_USERNAME` es el nombre de usuario que se utilizará para conectar a la base de datos PostgreSQL.
+
+### POSTGRES_PASSWORD
+
+La variable `POSTGRES_PASSWORD` es la contraseña asociada al usuario de PostgreSQL.
+
+### POSTGRES_DATABASE
+
+La variable `POSTGRES_DATABASE` especifica el nombre de la base de datos a la que se conectará la aplicación.
+
+### POSTGRES_PORT
+
+La variable `POSTGRES_PORT` define el puerto en el que el servidor de PostgreSQL está escuchando.
+
+### POSTGRES_HOST
+
+La variable `POSTGRES_HOST` especifica la dirección del host donde se encuentra el servidor de PostgreSQL.
+
+### SECRET_JWT
+
+La variable `SECRET_JWT` es la clave secreta utilizada para firmar y verificar los tokens JWT. Asegúrate de que sea una cadena segura y única.
 
 # Desarrollo
 
