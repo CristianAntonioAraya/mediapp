@@ -2,27 +2,28 @@ node_modules
 server/node_modules
 server/.env
 
-client/logs
-client/*.log
-client/npm-debug.log*
-client/yarn-debug.log*
-client/yarn-error.log*
-client/pnpm-debug.log*
-client/lerna-debug.log*
+packages/client/dist
 
-client/node_modules
-client/dist
-client/dist-ssr
-client/*.local
+packages/client/logs
+packages/client/*.log
+packages/client/npm-debug.log*
+packages/client/yarn-debug.log*
+packages/client/yarn-error.log*
+packages/client/pnpm-debug.log*
+packages/client/lerna-debug.log*
 
-client/# Editor directories and files
-client/.vscode/*
-client/.vscode
-client/!.vscode/extensions.json
-client/.idea
-client/.DS_Store
-client/*.suo
-client/*.ntvs*
-client/*.njsproj
-client/*.sln
-client/*.sw?
+packages/client/node_modules
+packages/client/dist
+packages/client/dist-ssr
+packages/client/*.local
+packages/client/# Editor directories and files
+packages/client/.vscode/*
+packages/client/.vscode
+packages/client/!.vscode/extensions.json
+packages/client/.idea
+packages/client/.DS_Store
+packages/client/*.suo
+packages/client/*.ntvs*
+packages/client/*.njsproj
+packages/client/*.sln
+packages/client/*.sw?
