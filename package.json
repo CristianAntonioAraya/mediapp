@@ -1,0 +1,18 @@
+{
+    "private": true,
+    "version": "1.0.0",
+    "devDependencies": {
+        "lerna": "^7.4.2"
+    },
+    "useWorkspaces": true,
+    "packages": [
+        "packages/client",
+        "packages/server"
+    ],
+    "scripts": {
+        "dev:client": "lerna run dev --scope=client",
+        "start:client": "lerna run start --scope=client",
+        "dev:server": "lerna run dev --scope=server",
+        "start:server": "lerna run start --scope=server"
+    }
+}
