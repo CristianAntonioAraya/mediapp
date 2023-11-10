@@ -10,9 +10,7 @@
         "packages/server"
     ],
     "scripts": {
-        "dev:client": "lerna run dev --scope=client",
-        "start:client": "lerna run start --scope=client",
-        "dev:server": "lerna run dev --scope=server",
-        "start:server": "lerna run start --scope=server"
+        "build": "npx lerna run build --parallel",
+        "start": "npx lerna run start --parallel"
     }
 }
