@@ -10,8 +10,11 @@ class DatabaseInitializer {
 
     constructor() {
         this.sequelize = new Sequelize(
-            'postgres://admin:VZJLGoItGiVwvllmLGQWzEkLIs0z2obk@dpg-cl7c6tv6e7vc739rgtr0-a.oregon-postgres.render.com/mediapp_9gao',
+            process.env.POSTGRES_DATABASE!,
+            process.env.POSTGRES_USERNAME!,
+            process.env.POSTGRES_PASSWORD!,
             {
+                host: process.env.POSTGRES_HOST!,
                 dialect: 'postgres',
                 logging: false,
                 pool: {
@@ -19,6 +22,9 @@ class DatabaseInitializer {
                     min: 0,
                     acquire: 30000,
                     idle: 10000,
+                },
+                dialectOptions: {
+                    ssl: false,
                 },
             }
         );
@@ -49,7 +55,7 @@ class DatabaseInitializer {
     }
 
     public async initializeDatabase(): Promise<void> {
-        await this.createTables();
+        // await this.createTables();
     }
 }
 

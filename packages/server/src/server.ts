@@ -28,10 +28,8 @@ class Server {
         this.app.use(bodyParser.json());
     }
     routes() {
-        this.app.use(
-            '/',
-            express.static(path.join(__dirname, '../../../client/dist'))
-        );
+        this.app.use(express.static(path.join(__dirname, '../client/dist')));
+
         appRoutes(this.app);
 
         this.app.get('*', (req, res) => {
