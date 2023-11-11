@@ -1,6 +1,7 @@
 import express, { Application } from 'express';
 import DatabaseInitializer from './db';
 import cors from 'cors';
+import path from 'path';
 
 import appRoutes from './router/AppRoutes';
 import bodyParser from 'body-parser';
@@ -27,7 +28,17 @@ class Server {
         this.app.use(bodyParser.json());
     }
     routes() {
+        this.app.use(
+            '/',
+            express.static(path.join(__dirname, '../../../client/dist'))
+        );
         appRoutes(this.app);
+
+        this.app.get('*', (req, res) => {
+            res.sendFile(
+                path.join(__dirname, '../../../client/dist', 'index.html')
+            );
+        });
         this.handleErrors();
     }
     dbConnection() {
@@ -46,8 +57,7 @@ class Server {
     }
     init() {
         this.app.listen(this.port, () => {
-            const environment = process.env.NODE_ENV;
-            console.log(`Server on port ${this.port} in ${environment} mode`);
+            console.log(`Server on port ${this.port}`);
         });
     }
 }

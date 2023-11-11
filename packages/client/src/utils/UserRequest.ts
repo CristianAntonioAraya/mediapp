@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:4000/api/v1';
+const API_URL = '/api/v1';
 
 const updateUser = async (
     phoneNumber: string,
@@ -25,12 +25,14 @@ const updateUser = async (
         const responseBody = await response.json();
         return responseBody;
     } catch (error) {
+        console.log('error');
         throw new Error('Error al iniciar sesión: ');
     }
 };
 
 const getUserInfo = async () => {
     try {
+        console.log('Get User Info');
         const token = localStorage.getItem('token');
         const id = localStorage.getItem('id');
 
@@ -41,6 +43,7 @@ const getUserInfo = async () => {
             'x-token': tokenValue,
         });
 
+        console.log(`${API_URL}/users/${id}`);
         const response = await fetch(`${API_URL}/users/${id}`, {
             method: 'GET',
             headers,
@@ -48,6 +51,7 @@ const getUserInfo = async () => {
         const responseBody = await response.json();
         return responseBody;
     } catch (error) {
+        console.log('error');
         throw new Error('Error al iniciar sesión: ');
     }
 };

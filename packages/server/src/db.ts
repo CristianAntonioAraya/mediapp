@@ -7,93 +7,48 @@ import { ProfessionalModel, QuestionModel, UserModel } from './models';
  */
 class DatabaseInitializer {
     private sequelize?: Sequelize;
-    private config: {
-        username: string;
-        password: string;
-        host: string;
-        database: string;
-    };
 
     constructor() {
-        this.config = {
-            username: process.env.POSTGRES_USERNAME || '',
-            password: process.env.POSTGRES_PASSWORD || '',
-            database: process.env.POSTGRES_DATABASE || '',
-            host: process.env.POSTGRES_HOST || '',
-        };
-        this.createSequelizeInstance();
-    }
-
-    private async createSequelizeInstance(createdDataBase?: string) {
         this.sequelize = new Sequelize(
-            `postgres://${this.config.username}:${this.config.password}@${
-                this.config.host
-            }:5432/${createdDataBase || ''}`,
+            'postgres://admin:VZJLGoItGiVwvllmLGQWzEkLIs0z2obk@dpg-cl7c6tv6e7vc739rgtr0-a.oregon-postgres.render.com/mediapp_9gao',
             {
                 dialect: 'postgres',
                 logging: false,
+                pool: {
+                    max: 5,
+                    min: 0,
+                    acquire: 30000,
+                    idle: 10000,
+                },
             }
         );
+        this.connectToDataBase();
     }
 
-    private async createDatabase(): Promise<void> {
-        try {
-            await this.sequelize!.query(
-                `CREATE DATABASE "${this.config.database}"`
-            );
-            console.log(
-                `Database "${this.config.database}" created successfully.`
-            );
-        } catch (error) {
-            if (
-                error.message.includes('ya existe') ||
-                error.message.includes('already exists')
-            ) {
-                console.log(
-                    `The database "${this.config.database}" already exists.`
-                );
-            } else {
-                console.error(
-                    `Error creating database "${this.config.database}":`,
-                    error
-                );
-                throw new Error(error);
-            }
-        }
-        console.log(`Checking finished, connecting to ${this.config.database}`);
-
-        this.createSequelizeInstance(this.config.database);
-
-        await this.verifyConnection();
-    }
-
-    private async verifyConnection(): Promise<void> {
+    private async connectToDataBase(): Promise<void> {
         try {
             await this.sequelize!.authenticate();
-            console.log(
-                `Connection to ${this.config.database} database established successfully.`
-            );
+            console.log('Connected to the database successfully.');
         } catch (error) {
-            console.error('Error connecting to database:', error);
+            console.error('Error connecting to the database:', error.message);
+            throw error;
         }
     }
 
     private async createTables(): Promise<void> {
-        ProfessionalModel.initialize(this.sequelize!);
-        QuestionModel.initialize(this.sequelize!);
-        UserModel.initialize(this.sequelize!);
-
-        await this.sequelize!.sync();
-        console.log('Tables created successfully.');
-    }
-
-    public async closeConnection(): Promise<void> {
-        await this.sequelize!.close();
-        console.log('Connection closed');
+        try {
+            ProfessionalModel.initialize(this.sequelize!);
+            QuestionModel.initialize(this.sequelize!);
+            UserModel.initialize(this.sequelize!);
+            await this.sequelize!.sync();
+            console.log('Tables created successfully.');
+        } catch (error) {
+            console.error('Error synchronizing tables:', error.message);
+            throw error;
+        }
     }
 
     public async initializeDatabase(): Promise<void> {
-        await this.createDatabase();
         await this.createTables();
     }
 }

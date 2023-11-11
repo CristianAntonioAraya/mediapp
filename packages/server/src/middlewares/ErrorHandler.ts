@@ -7,7 +7,7 @@ const logError = (
     res: Response,
     next: NextFunction
 ): void => {
-    // console.error(err);
+    console.error('middleware error', err);
     next(err);
 };
 

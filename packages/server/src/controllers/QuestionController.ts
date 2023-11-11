@@ -42,9 +42,11 @@ export async function createNewQuestion(
 ): Promise<void> {
     try {
         const questionData: IQuestion = req.body;
+        console.log('data body --->', questionData);
         const pro = await services.create(questionData);
         res.status(201).json({ ok: true, pro });
     } catch (error) {
+        console.log('error --->', error);
         next(error);
     }
 }

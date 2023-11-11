@@ -18,9 +18,10 @@ import AdminHomeView from '../views/admin/AdminHomeView.vue';
 import AdminProfessionlView from '../views/admin/AdminProfessionalView.vue';
 import AdminQuestionView from '../views/admin/AdminQuestionView.vue';
 import AdminAssignsView from '../views/admin/AdminAssignsView.vue';
+import MainViewVue from '../views/MainView.vue';
 
 const routes: RouteRecordRaw[] = [
-    { path: '/', redirect: '/login' },
+    { path: '/', name: 'main', component: MainViewVue },
 
     {
         path: '/signUp',

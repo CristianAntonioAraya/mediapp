@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:4000/api/v1';
+const API_URL = '/api/v1';
 
 const getAllProfessional = async () => {
     try {

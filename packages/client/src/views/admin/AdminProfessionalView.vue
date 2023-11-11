@@ -131,9 +131,22 @@ const handleCreateNew = async () => {
     Swal.fire({
         title: 'Crear Nuevo Profesional',
         html: `
-            <input id="swal-input-professionalName" class="swal2-input" placeholder="Nombre del Profesional" />
-            <input id="swal-input-speciality" class="swal2-input" placeholder="Especialidad" />
-            <input id="swal-input-range" class="swal2-input" placeholder="Rango" />
+            <div style="display: flex; flex-direction: column; margin-bottom: 10px;">
+            <label for="swal-input-professionalName">Nombre del Profesional</label>
+            <input id="swal-input-professionalName" class="swal2-input" placeholder="Ingrese el nombre del profesional" />
+        </div>
+
+        <div style="display: flex; flex-direction: column; margin-bottom: 10px;">
+            <label for="swal-input-speciality">Especialidad</label>
+            <input id="swal-input-speciality" class="swal2-input" placeholder="Ingrese la especialidad" />
+        </div>
+
+        <div style="display: flex; flex-direction: column; margin-bottom: 10px;">
+            <label for="swal-input-range">Rango (1-4)</label>
+            <input id="swal-input-range" class="swal2-input" placeholder="Ingrese el rango (1-4)" />
+        </div>
+
+
         `,
         showCancelButton: true,
         confirmButtonText: 'Guardar',

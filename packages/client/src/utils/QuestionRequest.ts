@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:4000/api/v1';
+const API_URL = '/api/v1';
 
 const getAllQuestion = async () => {
     try {
@@ -98,10 +98,14 @@ const createQuestion = async (
 
         const tokenValue = token || '';
 
+        console.log("creando nueva pregunta")
+
         const headers = new Headers({
             'Content-Type': 'application/json',
             'x-token': tokenValue,
         });
+
+        console.log(`${API_URL}/questions/create`);
 
         const response = await fetch(`${API_URL}/questions/create`, {
             method: 'POST',
