@@ -1,0 +1,7 @@
+{
+    "version": 2,
+    "builds": [
+        { "src": "packages/server/package.json", "use": "@vercel/node" }
+    ],
+    "outputDirectory": "packages/server/dist"
+}
